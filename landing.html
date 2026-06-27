@@ -195,6 +195,208 @@
       .hero-text, .section-text { font-size: 0.98rem; }
       .hero-photo { width: 120px; height: 120px; }
     }
+
+    /* === WOW EFFECTS === */
+    html { scroll-behavior: smooth; }
+
+    /* Animated gradient title */
+    .hero-title {
+      background: linear-gradient(90deg, #ffd470, #ff8c2d, #ffdb61, #ff6b6b, #ffd470);
+      background-size: 300% 100%;
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      animation: gradientShift 5s ease infinite;
+    }
+    @keyframes gradientShift {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Feature card hover lift */
+    .feature-card {
+      transition: transform 0.35s cubic-bezier(.4,0,.2,1),
+                  box-shadow 0.35s cubic-bezier(.4,0,.2,1),
+                  border-color 0.35s ease;
+      cursor: default;
+    }
+    .feature-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      box-shadow: 0 38px 72px rgba(0,0,0,0.42);
+      border-color: rgba(255,255,255,0.28);
+    }
+
+    /* Section hover */
+    .section {
+      transition: transform 0.35s cubic-bezier(.4,0,.2,1),
+                  box-shadow 0.35s ease;
+    }
+    .section:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 32px 60px rgba(0,0,0,0.22);
+    }
+
+    /* CTA button enhanced hover */
+    .cta-button {
+      transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease !important;
+    }
+    .cta-button:hover {
+      transform: translateY(-5px) scale(1.04);
+      box-shadow: 0 32px 68px rgba(255,161,63,0.62);
+      background: linear-gradient(135deg, #ffd070, #ff9a44);
+    }
+
+    /* Scroll fade-in */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(42px);
+      transition: opacity 0.8s cubic-bezier(.4,0,.2,1),
+                  transform 0.8s cubic-bezier(.4,0,.2,1);
+    }
+    .fade-in-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .feature-card.fade-in-up:nth-child(2) { transition-delay: 0.15s; }
+    .feature-card.fade-in-up:nth-child(3) { transition-delay: 0.30s; }
+
+    /* Parallax glow layer */
+    .parallax-bg {
+      position: fixed;
+      inset: -30%;
+      background:
+        radial-gradient(ellipse at 20% 15%, rgba(255,200,80,0.22) 0%, transparent 55%),
+        radial-gradient(ellipse at 78% 85%, rgba(255,100,40,0.16) 0%, transparent 55%);
+      pointer-events: none;
+      z-index: 0;
+      will-change: transform;
+    }
+    main.page { position: relative; z-index: 1; }
+
+    /* --- Feature icons: contrasted + interactive --- */
+    .feature-icon {
+      background: linear-gradient(135deg, rgba(255,185,75,0.38), rgba(255,110,40,0.28));
+      color: #ffd470;
+      box-shadow: inset 0 0 0 1px rgba(255,185,75,0.35),
+                  0 6px 20px rgba(255,145,45,0.25);
+      transition: transform 0.35s cubic-bezier(.4,0,.2,1),
+                  box-shadow 0.35s ease,
+                  background 0.35s ease,
+                  color 0.35s ease;
+    }
+    .feature-card:hover .feature-icon,
+    .feature-card:active .feature-icon {
+      transform: scale(1.2) rotate(10deg);
+      background: linear-gradient(135deg, rgba(255,185,75,0.65), rgba(255,110,40,0.55));
+      box-shadow: inset 0 0 0 1px rgba(255,185,75,0.55),
+                  0 10px 32px rgba(255,150,50,0.5);
+      color: #fff;
+    }
+
+    /* --- CTA button: inner spans --- */
+    .btn-text {
+      display: inline-block;
+      transition: opacity 0.22s ease, transform 0.22s ease;
+    }
+    .btn-success {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      font-size: 1rem;
+    }
+    .cta-button.success .btn-text {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    .cta-button.success .btn-success {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .cta-button.success {
+      background: linear-gradient(135deg, #4ade80, #16a34a) !important;
+      box-shadow: 0 22px 58px rgba(74,222,128,0.58) !important;
+    }
+
+    /* Ripple */
+    .ripple {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.45);
+      transform: scale(0);
+      animation: rippleAnim 0.65s ease-out forwards;
+      pointer-events: none;
+    }
+    @keyframes rippleAnim {
+      to { transform: scale(5); opacity: 0; }
+    }
+
+    /* Confetti particles */
+    .confetti-particle {
+      position: fixed;
+      width: 9px;
+      height: 9px;
+      border-radius: 2px;
+      pointer-events: none;
+      z-index: 9999;
+      animation: confettiFall 1.3s ease-out forwards;
+    }
+    @keyframes confettiFall {
+      0%   { opacity: 1; transform: translateY(0) rotate(0deg) scale(1); }
+      100% { opacity: 0; transform: translateY(140px) rotate(540deg) scale(0.4); }
+    }
+
+    /* --- Telegram icon --- */
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: color 0.25s ease, transform 0.25s ease;
+    }
+    .cta-link:hover {
+      color: #7dd4fc;
+      transform: translateY(-2px);
+    }
+    .tg-icon {
+      display: inline-flex;
+      align-items: center;
+      color: #38b2f0;
+      filter: drop-shadow(0 0 5px rgba(56,178,240,0.55));
+      animation: tgPulse 2.8s ease-in-out infinite;
+      flex-shrink: 0;
+    }
+    @keyframes tgPulse {
+      0%, 100% { opacity: 1; filter: drop-shadow(0 0 5px rgba(56,178,240,0.55)); }
+      50%       { opacity: 0.65; filter: drop-shadow(0 0 14px rgba(56,178,240,1)); }
+    }
+    .cta-link:hover .tg-icon {
+      animation-play-state: paused;
+      color: #7dd4fc;
+      filter: drop-shadow(0 0 18px rgba(125,212,252,0.95));
+    }
+
+    /* --- Mobile: touch active states --- */
+    @media (hover: none) {
+      .feature-card:active {
+        transform: translateY(-6px) scale(1.01);
+        box-shadow: 0 26px 50px rgba(0,0,0,0.35);
+      }
+      .cta-button:active {
+        transform: scale(0.97) !important;
+      }
+      .section:active {
+        transform: translateY(-3px);
+      }
+    }
+    /* Ensure tap target sizes are accessible on mobile */
+    .cta-button { min-height: 52px; min-width: 180px; }
+    .cta-link    { min-height: 44px; padding: 4px 8px; }
   </style>
 </head>
 <body>
@@ -246,9 +448,92 @@
     </section>
 
     <div class="cta-panel">
-      <button class="cta-button" type="button">ХОЧУ РАСТИ</button>
-      <a class="cta-link" href="https://t.me/fatimka_30" target="_blank" rel="noreferrer noopener">@fatimka_30</a>
+      <button class="cta-button" type="button" aria-label="Хочу расти">
+        <span class="btn-text">ХОЧУ РАСТИ</span>
+        <span class="btn-success" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+          Заявка принята!
+        </span>
+      </button>
+      <a class="cta-link" href="https://t.me/fatimka_30" target="_blank" rel="noreferrer noopener" aria-label="Написать в Telegram @fatimka_30">
+        <span class="tg-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></span>
+        @fatimka_30
+      </a>
     </div>
   </main>
+
+  <script>
+    // Parallax glow background
+    const parallaxBg = document.createElement('div');
+    parallaxBg.className = 'parallax-bg';
+    document.body.insertBefore(parallaxBg, document.body.firstChild);
+
+    window.addEventListener('scroll', () => {
+      parallaxBg.style.transform = `translateY(${window.scrollY * 0.25}px)`;
+    }, { passive: true });
+
+    // Scroll-triggered fade-in from bottom
+    const fadeTargets = document.querySelectorAll(
+      '.hero, .feature-card, .section, .cta-panel'
+    );
+    fadeTargets.forEach(el => el.classList.add('fade-in-up'));
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    requestAnimationFrame(() => {
+      fadeTargets.forEach(el => observer.observe(el));
+    });
+
+    // CTA button — success animation
+    const ctaBtn = document.querySelector('.cta-button');
+    let btnCooldown = false;
+
+    ctaBtn.addEventListener('click', function (e) {
+      if (btnCooldown) return;
+      btnCooldown = true;
+
+      // Ripple at click position
+      const rect = ctaBtn.getBoundingClientRect();
+      const ripple = document.createElement('span');
+      ripple.className = 'ripple';
+      const size = Math.max(rect.width, rect.height);
+      const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left - size / 2;
+      const y = (e.touches ? e.touches[0].clientY : e.clientY) - rect.top - size / 2;
+      ripple.style.cssText = `width:${size}px;height:${size}px;left:${x}px;top:${y}px`;
+      ctaBtn.appendChild(ripple);
+
+      // Switch to success state
+      ctaBtn.classList.add('success');
+
+      // Confetti burst
+      const colors = ['#ffd470','#ff8c2d','#ffdb61','#ff6b6b','#4ade80','#7dd4fc','#fff'];
+      const bx = rect.left + rect.width / 2;
+      const by = rect.top;
+      for (let i = 0; i < 22; i++) {
+        const p = document.createElement('div');
+        p.className = 'confetti-particle';
+        const spreadX = (Math.random() - 0.5) * rect.width * 2.5;
+        const delay = Math.random() * 0.25;
+        const dur = 0.9 + Math.random() * 0.7;
+        p.style.cssText = `left:${bx + spreadX}px;top:${by}px;background:${colors[Math.floor(Math.random()*colors.length)]};animation-delay:${delay}s;animation-duration:${dur}s;border-radius:${Math.random()>0.5?'50%':'3px'}`;
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), (delay + dur) * 1000 + 100);
+      }
+
+      // Reset after 2.8s
+      setTimeout(() => {
+        ctaBtn.classList.remove('success');
+        ripple.remove();
+        btnCooldown = false;
+      }, 2800);
+    });
+  </script>
 </body>
 </html>
